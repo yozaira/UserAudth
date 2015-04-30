@@ -76,7 +76,6 @@ class DB {
     }
 
 
-
     /*
     * Execute a query to find one or more items on a table
     * @param string $sql query string
@@ -122,7 +121,7 @@ class DB {
     }
 
 
-    /**
+    /*
     * Returns erros if query fails
     * @return boolean
     */
@@ -169,7 +168,6 @@ class DB {
     }
 
 
-
     /*
     * Execute a query on specific table to find a specific item
     * Uses action method created above to return result
@@ -196,7 +194,6 @@ class DB {
     }
 
 
-
     /*
     * Retuns a result set from the query method
     * @return array with values found as objects
@@ -216,7 +213,6 @@ class DB {
     }
 
 
-
     /*
     * Retuns objects from result set array
     * It allows to access itmes found in db
@@ -226,7 +222,6 @@ class DB {
     public function first() {
       return $this->_results[0];
     }
-
 
 
     /*
@@ -266,7 +261,6 @@ class DB {
       }
       return false;
     }
-
 
 
     /*

@@ -18,7 +18,7 @@ $user = new User();
 # if not it redirects him/her to the login page. Otherwise it
 # displays the user profile information.
 if(!$user->isLoggedIn()) {
-	Redirect::to('index.php');
+  Redirect::to('index.php');
 }
 
 # add ?username=joe to address bar
@@ -26,46 +26,46 @@ if(!$user->isLoggedIn()) {
 
 if(Input::exists() ) {
 
-	if (Token::check( input::get('token') ) ){
-	  # echo these values out to confirm that the form token and session token are the same
-		// echo input::get('token').'<br/>';
-		// var_dump($_SESSION);
+  if (Token::check( input::get('token') ) ){
+    # echo these values out to confirm that the form token and session token are the same
+    // echo input::get('token').'<br/>';
+    // var_dump($_SESSION);
 
-		$validation_rules = array(
-			'name' => array(
-			  'fieldName'  => 'Name',
-				'required'   => true,
-				'alpha'      => true,
-				'min_length' => 2,
-				'max_length' => 30
-			),
-			'email' => array(
-			  'fieldName'  => 'Email',
+    $validation_rules = array(
+      'name' => array(
+        'fieldName'  => 'Name',
+        'required'   => true,
+        'alpha'      => true,
+        'min_length' => 2,
+        'max_length' => 30
+      ),
+      'email' => array(
+        'fieldName'  => 'Email',
         'required'  => true,
         'email'     => true,
         'unique'    => true
-			)
-		);
+      )
+    );
 
-		# Create a new Validator instance
-		$validator = new Validator($_POST, $validation_rules);
-		$clean_data = $validator->get_fields();
+    # Create a new Validator instance
+    $validator = new Validator($_POST, $validation_rules);
+    $clean_data = $validator->get_fields();
 
-		# if validation passed create an instance of the user and  process the data
-		if($validator->validate() ){
-			try {
-				$user->updateUser( array(
-						'name' => Input::get('name'),
-						'email'=> Input::get('email')
-				));
-				Session::flashMessage('home', 'Your data has been updated');
-				Redirect::to('index.php');
-			}
-			catch (Exception $e) {
-				die($e->getMessage());
-			}
+    # if validation passed create an instance of the user and  process the data
+    if($validator->validate() ){
+      try {
+        $user->updateUser( array(
+            'name' => Input::get('name'),
+            'email'=> Input::get('email')
+        ));
+        Session::flashMessage('home', 'Your data has been updated');
+        Redirect::to('index.php');
+      }
+      catch (Exception $e) {
+        die($e->getMessage());
+      }
 
-	  } else {
+    } else {
         # output errors
         // var_dump($validator->get_errors() );
         foreach ( $validator->get_errors() as $input_errors) {
@@ -75,19 +75,19 @@ if(Input::exists() ) {
           $validation_errors[] = $value ;
           }
         }
-		}
+    }
 
-	} else {  # the else wont show if using  if(Input::exists() )
-			echo 'CSRF attack<br/>';
-		 	var_dump(Token::check( input::get('token') ) ) ;     # boolean false
-	}
+  } else {  # the else wont show if using  if(Input::exists() )
+      echo 'CSRF attack<br/>';
+      var_dump(Token::check( input::get('token') ) ) ;     # boolean false
+  }
 }
 ?>
 
 <?php include_once 'includes/header.php'; ?>
 <div class="wrapper">
-	<form id ="updateForm" class="allForms" action="" method="post">
-  	<!-- PHP errors response -->
+  <form id ="updateForm" class="allForms" action="" method="post">
+    <!-- PHP errors response -->
     <?php
     if(!empty($validation_errors)) {
        echo '<div class="alert alert-danger">';
@@ -101,16 +101,16 @@ if(Input::exists() ) {
     }
     ?> <!-- # flash Messages -->
 
-		<h2 class="allForms-heading">Update Profile</h2>
-	  <input type="hidden" name="token" value="<?php echo Token::generate(); ?>" />
-		<label>Name</label>
-		<input type="text" name="name", class ="form-control" value="<?php echo $user->getUserData()->name; ?>" placeholder="Enter new name"/>
-	 	<br/>
-		<label>Email</label>
-		<input type="email", name="email", class ="form-control" value="<?php echo $user->getUserData()->email; ?>"  placeholder="Enter new email"/>
-		<br/>
-		<button class="btn btn-lg btn-primary btn-block" type="submit" name="submit" id="submit">Update Profile</button>
-	</form>
+    <h2 class="allForms-heading">Update Profile</h2>
+    <input type="hidden" name="token" value="<?php echo Token::generate(); ?>" />
+    <label>Name</label>
+    <input type="text" name="name", class ="form-control" value="<?php echo $user->getUserData()->name; ?>" placeholder="Enter new name"/>
+    <br/>
+    <label>Email</label>
+    <input type="email", name="email", class ="form-control" value="<?php echo $user->getUserData()->email; ?>"  placeholder="Enter new email"/>
+    <br/>
+    <button class="btn btn-lg btn-primary btn-block" type="submit" name="submit" id="submit">Update Profile</button>
+  </form>
 </div>
 <?php include_once 'includes/footer.php'; ?>
 

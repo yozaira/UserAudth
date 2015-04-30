@@ -12,13 +12,11 @@ require_once '../core/init.php';
 */
 class Config {
 
-  /**
+  /*
    * this method gets the db info stored in global config array.
    * Accepts a string and returns the string path of the  global
    * config array in init.php
-   *
    * @param string $path the string patth of global config.
-   * @
    */
   public static function get($path = null) {
     if($path) {

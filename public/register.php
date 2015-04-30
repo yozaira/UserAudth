@@ -21,11 +21,11 @@ if($user->isLoggedIn()){
 }
 
 if(Input::exists()) {
-	if (Token::check(input::get('token') )){
+  if (Token::check(input::get('token') )){
     # add '?username=joe' to address bar
     # if it return false, token is working
-	  # echo these values out to confirm that the
-		# form token and session token are the same
+    # echo these values out to confirm that the
+    # form token and session token are the same
     // var_dump($_POST);
     // var_dump($_SESSION);
 
@@ -69,17 +69,17 @@ if(Input::exists()) {
         $salt = Hash::salt(32);
         # user activation code to be sent to user's email
         $activation_code = md5(uniqid(rand(), true));
-				# call create method to insert data
-				$register = DB::getInstance()->insert('users', array(
-						'name' 	=> Input::get('name'),
-						'email' => Input::get('email'),
-						'pass'	=> Hash::make(Input::get('password'), $salt), # class for pw encryption
-						'salt'	=> $salt,
+        # call create method to insert data
+        $register = DB::getInstance()->insert('users', array(
+            'name'  => Input::get('name'),
+            'email' => Input::get('email'),
+            'pass'  => Hash::make(Input::get('password'), $salt), # class for pw encryption
+            'salt'  => $salt,
             'activation_code' => $activation_code,
-						'group' => 1,
-						'joined'=> date('Y-n-d H:i:s')
-				));
-				if($register) {
+            'group' => 1,
+            'joined'=> date('Y-n-d H:i:s')
+        ));
+        if($register) {
            # include file with the html email. Contains the mesage body variable.
            # Can be substitute for a shorter massage with no html or style.
            include 'verification-email.php';
@@ -87,8 +87,8 @@ if(Input::exists()) {
            $user->sendActivationEmail('yozaira@gmail.com','SiteName', Input::get('email'), 'Sign-up Verification', $message);
            # if data insert succesfuly, redirect user
            Redirect::to('account-created.php');
-				}
-		} else {
+        }
+    } else {
         # output errors
         // var_dump($validator->get_errors() );
         foreach ( $validator->get_errors() as $input_errors) {
@@ -97,18 +97,18 @@ if(Input::exists()) {
           $validation_errors[] = $value ;
           }
         }
-		}
-	} else {
-	  # this else wont be executed if using 'if(Input::exists())'control
-		echo 'CSRF attack<br/>';
-		// var_dump(Token::check( input::get('token')));  # boolean false
-	}
+    }
+  } else {
+    # this else wont be executed if using 'if(Input::exists())'control
+    echo 'CSRF attack<br/>';
+    // var_dump(Token::check( input::get('token')));  # boolean false
+  }
 }
 
 ?>
 <?php include_once 'includes/header.php'; ?>
 <div class="wrapper">
-	<form id ="registerForm" class="allForms" action="" method="post">
+  <form id ="registerForm" class="allForms" action="" method="post">
     <!-- PHP errors response -->
     <?php
     if(!empty($validation_errors)) {
@@ -122,14 +122,14 @@ if(Input::exists()) {
        echo '<div class="alert alert-info text-center"><h4>' .Session::flashMessage('success') .'<h4/></div>' ;
     }
     ?> <!-- # flash Messages -->
-	 <h2 class="allForms-heading">Register</h2>
-		<input type="hidden" name="token" value="<?php echo Token::generate(); ?>" />
-		<!-- Order of method parameters: label, type, name, id, value, errors, placeholder -->
-		<?php Form::create_form_input( 'Name', 'text', 'name', 'name', ' ',   'Enter your name' ) ;?><br/>
-		<?php Form::create_form_input( 'Email', 'text', 'email', 'email', ' ', 'Enter your email' ) ;?><br/>
-		<?php Form::create_form_input( 'Choose a Password', 'password', 'password',  'pw',  ' ',  ' ', 'Choose a Password' ) ;?>
-		<?php Form::create_form_input( 'Reenter your Password', 'password', 'pw-confirm', 'pw-confirm',  ' ', ' ', 'Re-enter your Password' ) ;?><br/>
-		<button class="btn btn-lg btn-primary btn-block" type="submit" name="submit" id="submit">Register</button>
-	</form>
+   <h2 class="allForms-heading">Register</h2>
+    <input type="hidden" name="token" value="<?php echo Token::generate(); ?>" />
+    <!-- Order of method parameters: label, type, name, id, value, errors, placeholder -->
+    <?php Form::create_form_input( 'Name', 'text', 'name', 'name', ' ',   'Enter your name' ) ;?><br/>
+    <?php Form::create_form_input( 'Email', 'text', 'email', 'email', ' ', 'Enter your email' ) ;?><br/>
+    <?php Form::create_form_input( 'Choose a Password', 'password', 'password',  'pw',  ' ',  ' ', 'Choose a Password' ) ;?>
+    <?php Form::create_form_input( 'Reenter your Password', 'password', 'pw-confirm', 'pw-confirm',  ' ', ' ', 'Re-enter your Password' ) ;?><br/>
+    <button class="btn btn-lg btn-primary btn-block" type="submit" name="submit" id="submit">Register</button>
+  </form>
 </div>
 <?php include_once 'includes/footer.php'; ?>

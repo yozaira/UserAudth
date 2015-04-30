@@ -66,13 +66,13 @@ if(!$user->isLoggedIn()){
           # this check can be perform on a page by page basis.
           # Administrator has an id of 2 in table group of the db.
           # And Users has id of 1
-        	if($user->hasPermission('admin') ) {
-        		echo '<p>You are logged in as an administrator!</p>';
-        	}
-        	else {
-        		echo '<p>If you are an admin, <a href="#">Log in</a> as
+          if($user->hasPermission('admin') ) {
+            echo '<p>You are logged in as an administrator!</p>';
+          }
+          else {
+            echo '<p>If you are an admin, <a href="#">Log in</a> as
             administrator or <a href="#">Create an account</a>';
-        	}
+          }
 
       } else {
          echo '<p> If you dont have an account, <a href="register.php">Register</a> </p>';
