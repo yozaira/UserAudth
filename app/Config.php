@@ -20,25 +20,25 @@ class Config {
    * @param string $path the string patth of global config.
    * @
    */
-	public static function get($path = null) {
-		if($path) {
-			// var_dump($path);
-			# initialize $config variable with $GOBALS
-			# multidimensional array value
-			$config = $GLOBALS['config'] ;
-			# divide path into individual string separated by "/"
-			$path = explode('/' , $path);
-			# print_r($path);
-			foreach ($path as $pathString) {
-				// var_dump($pathString);
-				# if there global config contains the string path
-				# pass this value to $config var and retun it.
-				if(isset( $config[$pathString] )) {
-				  // var_dump($config[$pathString] );
-				  $config = $config[$pathString];
-				}
-			}
-			return $config;
-		}
-	}
+  public static function get($path = null) {
+    if($path) {
+      // var_dump($path);
+      # initialize $config variable with $GOBALS
+      # multidimensional array value
+      $config = $GLOBALS['config'] ;
+      # divide path into individual string separated by "/"
+      $path = explode('/' , $path);
+      # print_r($path);
+      foreach ($path as $pathString) {
+        // var_dump($pathString);
+        # if there global config contains the string path
+        # pass this value to $config var and retun it.
+        if(isset( $config[$pathString] )) {
+          // var_dump($config[$pathString] );
+          $config = $config[$pathString];
+        }
+      }
+      return $config;
+    }
+  }
 }
