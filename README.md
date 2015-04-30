@@ -1,4 +1,4 @@
-### Overfiew
+### Overview
 
 This is a simple registration-login system website that uses PHP Object Oriented features, PHP Data Objects (PDO), and PSR-4 specification for autoloading classes.
 
