@@ -1,0 +1,29 @@
+{
+    "name": "registration-with-composer",
+    "description": "This is a PHP Object Oriented registration loging system",
+    "version": "1.0.0",
+    "type": "project",
+    "keywords": ["logging", "registration"],
+    "homepage": "http://yozie.net/demos",
+    "time": "2015-2-21",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Yozie Rojas",
+            "email": "yozaira@gmail.com",
+            "homepage": "http://www.yozie.net",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": ">= 5.3.0",
+        "phpmailer/phpmailer": "dev-master"
+    },
+    "autoload": {
+      "psr-4": {
+          "App\\": "app/"
+      }
+
+    }
+
+}
