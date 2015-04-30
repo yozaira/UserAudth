@@ -1,11 +1,12 @@
 <?php namespace App;
 
-/**
+/*
 * core/init.php file contains the global config
 * array with the db info.
 */
 require_once '../core/init.php';
-/**
+
+/*
 * Config class access and returns db, sessions
 * and cookies info contains in config
 * global array
